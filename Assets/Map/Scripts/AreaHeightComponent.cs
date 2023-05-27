@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class AreaHeaightComponent : MonoBehaviour
+public class AreaHeightComponent : MonoBehaviour
 {
 
-    [SerializeField] float height = 1.0f;
-    [SerializeField] float speed = 1.0f;
+    float height = 1.0f;
+    float speed = 1.0f;
 
     float heightAcc = 1.0f;
 
@@ -35,15 +35,23 @@ public class AreaHeaightComponent : MonoBehaviour
         }
     }
 
-    public void Raise()
+    public float getHeightAcc()
+    {
+        return heightAcc;
+    }
+
+    public void Raise(float time)
     {
         height = 1f;
+        speed = 1 / time;
     }
-    public void Lower()
+    public void Lower(float time)
     {
         height = 0f;
+        speed = 1 / time;
     }
-    public void SetHeight(float newHeight) {
+    public void SetHeight(float newHeight, float time) {
         height = newHeight;
+        speed = 1 / time;
     }
 }
