@@ -255,6 +255,8 @@ GameObject:
   - component: {fileID: 570563959}
   - component: {fileID: 570563958}
   - component: {fileID: 570563957}
+  - component: {fileID: 570563963}
+  - component: {fileID: 570563962}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -439,6 +441,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &570563962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570563956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba796f0266904f6439bcbaeb3e29a6ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnAreaTime: 2
+  WallAreaTime: 5
+  Map: {fileID: 0}
+  Waves: []
+--- !u!114 &570563963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570563956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba796f0266904f6439bcbaeb3e29a6ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnAreaTime: 2
+  WallAreaTime: 5
+  Map: {fileID: 0}
+  Waves: []
 --- !u!1 &577586654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1265,81 @@ Transform:
   m_Father: {fileID: 678761301}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1097941315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097941317}
+  - component: {fileID: 1097941316}
+  m_Layer: 0
+  m_Name: Game System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1097941316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097941315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba796f0266904f6439bcbaeb3e29a6ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnAreaTime: 2
+  WallAreaTime: 5
+  Map: {fileID: 5766032665051527385}
+  Waves:
+  - state: 0
+    timer: 5
+    enemies:
+    - angle: 60
+      number: 3
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 90
+      number: 3
+      enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
+  - state: 0
+    timer: 15
+    enemies:
+    - angle: 200
+      number: 4
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 230
+      number: 4
+      enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
+  - state: 0
+    timer: 25
+    enemies:
+    - angle: 260
+      number: 20
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 310
+      number: 20
+      enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
+--- !u!4 &1097941317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097941315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8844585, y: 1.2392435, z: 0.47004414}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598895308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,6 +1942,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 77802178402866175, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095231014678851786, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+      propertyPath: m_TagString
+      value: Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 4975008646439348865, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+      propertyPath: speed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5766032665512569738, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
       propertyPath: m_Name
       value: Map
@@ -1905,5 +2026,14 @@ PrefabInstance:
       propertyPath: m_Controllers.Array.data[0]
       value: 
       objectReference: {fileID: 1598895314}
+    - target: {fileID: 7507597630724993581, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+      propertyPath: speed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+--- !u!1 &5766032665051527385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5766032665512569738, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+  m_PrefabInstance: {fileID: 5766032665051527384}
+  m_PrefabAsset: {fileID: 0}
