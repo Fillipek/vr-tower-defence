@@ -88,8 +88,9 @@ public class SpawnEnemySystem : MonoBehaviour
     {
         if (wallHeight == null || spawnHeight == null)
         {
-            wallHeight = Helper.FindComponentInChildWithTag<AreaHeightComponent>(Map, "Wall");
-            spawnHeight = Helper.FindComponentInChildWithTag<AreaHeightComponent>(Map, "Spawn");
+           
+            wallHeight = Map.GetNamedChild("wall-area").GetComponent<AreaHeightComponent>();
+            spawnHeight = Map.GetNamedChild("spawn-area").GetComponent<AreaHeightComponent>();
         }
     }
 
@@ -101,7 +102,6 @@ public class SpawnEnemySystem : MonoBehaviour
             {
 
                 Vector3 pos = Helper.SphericalToCartesian(UnityEngine.Random.Range(.85f, .95f), enemy.angle+i, 0);
-                Debug.Log(pos.ToString());
                 GameObject newObject = Instantiate(enemy.enemy, EnemyGameObject.transform ,false);
                 newObject.transform.localPosition = pos;
             }
