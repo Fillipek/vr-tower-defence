@@ -20,16 +20,20 @@ public class SpawnEnemySystem : MonoBehaviour
     AreaHeightComponent wallHeight = null;
     AreaHeightComponent spawnHeight = null;
     // Start is called before the first frame update
-    void Start()
+    private void Init()
     {
-        wallHeight = MapSingleton.Instance.Wall.GetComponent<AreaHeightComponent>();
-        spawnHeight = MapSingleton.Instance.Spawn.GetComponent<AreaHeightComponent>();
+        if (wallHeight == null || spawnHeight == null)
+        {
+            wallHeight = MapSingleton.Instance.Wall.GetComponent<AreaHeightComponent>();
+            spawnHeight = MapSingleton.Instance.Spawn.GetComponent<AreaHeightComponent>();
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        Init();
         foreach (var wave in Waves)
         {
             if (wave.state == Wave.State.NotSpawn && Time.realtimeSinceStartup > wave.timer)
