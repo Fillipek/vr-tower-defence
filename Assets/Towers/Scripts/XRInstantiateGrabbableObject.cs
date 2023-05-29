@@ -6,13 +6,13 @@ public class XRInstantiateGrabbableObject : XRBaseInteractable
     [SerializeField]
     private GameObject grabbableObject;
 
-    [SerializeField]
-    private Transform transformToInstantiate;
+    //[SerializeField]
+    //private Transform transformToInstantiate;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         // Instantiate object
-        GameObject newObject = Instantiate(grabbableObject, transformToInstantiate.position, Quaternion.identity);
+        GameObject newObject = Instantiate(grabbableObject, ControllersSingleton.Instance.RightController.transform.position, Quaternion.identity);
         // Get grab interactable from prefab
         XRGrabInteractable objectInteractable = newObject.GetComponent<XRGrabInteractable>();
 
