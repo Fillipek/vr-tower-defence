@@ -14,7 +14,6 @@ public class SpawnEnemySystem : MonoBehaviour
 {
     [SerializeField] private float SpawnAreaStateChangeTime = 2f;
     [SerializeField] private float WallAreaStateChangeTime = 5f;
-    [SerializeField] private GameObject Map;
     [SerializeField] private Wave[] Waves;
 
 
@@ -23,45 +22,34 @@ public class SpawnEnemySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-  
+        wallHeight = MapSingleton.Instance.Wall.GetComponent<AreaHeightComponent>();
+        spawnHeight = MapSingleton.Instance.Spawn.GetComponent<AreaHeightComponent>();
     }
 
 
-    float timerSpawn = 0f;
-    float timerWall = 0f;
     // Update is called once per frame
     void Update()
     {
-        setAreaComponentWhenReady();
         foreach (var wave in Waves)
         {
             if (wave.state == Wave.State.NotSpawn && Time.realtimeSinceStartup > wave.timer)
             {
-                PrepareForSpawn(wave);
-                timerSpawn = SpawnAreaStateChangeTime;
+                wave.state = Wave.State.SpawnInProgress;
+                StartCoroutine(StartSpawnCycle(wave));
 
-            }
-            if (wave.state == Wave.State.SpawnInProgress)
-            {
-                timerSpawn -= Time.deltaTime;
-                if (timerSpawn < 0)
-                {
-                    Spawn(wave);
-                    timerWall = WallAreaStateChangeTime;
-
-                }
-            }
-            if (wave.state == Wave.State.WallInProgress)
-            {
-                timerWall -= Time.deltaTime;
-                if (timerWall < 0)
-                {
-                    ActivateWave(wave);
-
-                }
             }
         }
 
+    }
+
+    private IEnumerator StartSpawnCycle(Wave wave)
+    {
+        PrepareForSpawn(wave);
+        yield return new WaitForSeconds(SpawnAreaStateChangeTime);
+        Spawn(wave);
+        yield return new WaitForSeconds(WallAreaStateChangeTime);
+        ActivateWave(wave);
+        yield return null;
     }
 
     private void ActivateWave(Wave wave)
@@ -84,25 +72,15 @@ public class SpawnEnemySystem : MonoBehaviour
         spawnHeight.Raise(SpawnAreaStateChangeTime);
     }
 
-    private void setAreaComponentWhenReady()
-    {
-        if (wallHeight == null || spawnHeight == null)
-        {
-           
-            wallHeight = Map.GetNamedChild("wall-area").GetComponent<AreaHeightComponent>();
-            spawnHeight = Map.GetNamedChild("spawn-area").GetComponent<AreaHeightComponent>();
-        }
-    }
 
     void SpawnEnemy(Wave wave)
     {
-        GameObject EnemyGameObject = Map.GetNamedChild("Enemy");
         foreach (var enemy in wave.enemies) {
             for (var i = 0; i < enemy.number; i++)
             {
 
                 Vector3 pos = Helper.SphericalToCartesian(UnityEngine.Random.Range(.85f, .95f), enemy.angle+i, 0);
-                GameObject newObject = Instantiate(enemy.enemy, EnemyGameObject.transform ,false);
+                GameObject newObject = Instantiate(enemy.enemy, MapSingleton.Instance.Enemy.transform ,false);
                 newObject.transform.localPosition = pos;
             }
         }
