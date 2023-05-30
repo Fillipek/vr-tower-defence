@@ -22,22 +22,31 @@ public class ProjectileComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Target == null)
+        {
+            Remove();
+            return;
+        }
         transform.Translate(Vector3.Normalize(Target.transform.localPosition - transform.localPosition) * speed * Time.deltaTime, MapSingleton.Instance.Map.transform);
         
         var dist = Target.transform.position - transform.position;
         Debug.Log(dist.sqrMagnitude);
         if(dist.sqrMagnitude >= prevDist.sqrMagnitude)
         {
-            Target.GetComponent<HealthComponent>().DealDamage(10);
-           
-            var tempList = transform.Cast<Transform>().ToList();
-            foreach (var child in tempList)
-            {
-            
-                DestroyImmediate(child.gameObject);
-            }
-            DestroyImmediate(this.gameObject);
+            Target.GetComponent<HealthComponent>().DealDamage(damage);
+            Remove();
         }
         prevDist = dist;
+    }
+
+    void Remove()
+    {
+        var tempList = transform.Cast<Transform>().ToList();
+        foreach (var child in tempList)
+        {
+
+            DestroyImmediate(child.gameObject);
+        }
+        DestroyImmediate(this.gameObject);
     }
 }

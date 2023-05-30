@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6715508759716973879}
   - component: {fileID: 5411027143416665611}
   - component: {fileID: -1539724986223689171}
+  - component: {fileID: -982438210212083145}
+  - component: {fileID: -7811218135142155562}
   m_Layer: 0
   m_Name: TestEnemyBlue
   m_TagString: Enemy
@@ -111,3 +113,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+--- !u!114 &-982438210212083145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405367104892413080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa7557f43adc874097a85d9260b4be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  speed: 0.05
+--- !u!114 &-7811218135142155562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405367104892413080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe4a69021303ed49898e61e1316cf8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 10

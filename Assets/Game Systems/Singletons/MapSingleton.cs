@@ -25,7 +25,8 @@ public class MapSingleton : MonoBehaviour
     public GameObject Towers { get; private set; }
     public GameObject Spawn { get; private set; }
     public GameObject Wall { get; private set; }
-
+    public GameObject MainCastle { get; private set; }
+    public GameObject Message { get; private set; }
     private void Start()
     {
         Map = GameObject.Find("Map");
@@ -33,6 +34,8 @@ public class MapSingleton : MonoBehaviour
         Towers = Map.GetNamedChild("Towers");
         Wall = Map.GetNamedChild("wall-area");
         Spawn = Map.GetNamedChild("spawn-area");
+        MainCastle = Map.GetNamedChild("MainCastle");
+        Message = Map.GetNamedChild("Message");
     }
  
 }
