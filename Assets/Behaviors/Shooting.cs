@@ -6,6 +6,7 @@ using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(LineRenderer))]
 public class Shooting : MonoBehaviour
 {
     [SerializeField]
@@ -14,13 +15,40 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     private GameObject projectile;
 
-    private List<GameObject> enemiesInRange;
-    private GameObject currentTarget;
+    [SerializeField]
+    private GameObject shootingOrigin;
+
+    [SerializeField]
+    private float velocity = 1.0f;
+
+    [SerializeField]
+    private float frequency = 1.0f;
+
+    private List<GameObject> enemiesInRange = new List<GameObject>();
+    private GameObject currentTarget = null;
+    private LineRenderer lineRenderer;
+    private float cooldown = 0f;
 
     void Start()
     {
-        enemiesInRange = new List<GameObject>();
-        currentTarget = null;
+        lineRenderer = GetComponent<LineRenderer>();
+
+        if (shootingOrigin is null)
+        {
+            Debug.LogError(this + ": shootingOrigin not set.");
+            enabled = false;
+        }
+        if (projectile is null)
+        {
+            Debug.LogError(this + ": projectile not set.");
+            enabled = false;
+        }
+    }
+
+    void Update()
+    {
+        UpdateShooting();
+        UpdateLineVisual();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -77,5 +105,48 @@ public class Shooting : MonoBehaviour
             Debug.Log("Target uchanged.");
         }
         
+    }
+
+    void UpdateShooting()
+    {
+        if (cooldown < 0f)
+        {
+            if (currentTarget != null)
+            {
+                Shoot();
+                cooldown = 1f / frequency;
+            }
+        }
+        else
+        {
+            cooldown -= Time.deltaTime;
+
+        }
+    }
+
+    void UpdateLineVisual()
+    {
+        if (currentTarget != null)
+        {
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, shootingOrigin.transform.position);
+            lineRenderer.SetPosition(1, currentTarget.transform.position);
+        }
+        else
+        {
+            lineRenderer.positionCount = 0;
+        }
+    }
+
+    void Shoot()
+    {
+        Debug.Log("pew");
+        Vector3 targetVector = Vector3.Normalize(currentTarget.transform.position - shootingOrigin.transform.position);
+
+        GameObject newProjectile = Instantiate(projectile);
+        newProjectile.transform.position = shootingOrigin.transform.position;
+        newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
+        newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
+
     }
 }
