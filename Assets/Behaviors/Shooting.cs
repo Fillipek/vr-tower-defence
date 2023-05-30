@@ -7,6 +7,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(PlaceOnTheMapComponent))]
 public class Shooting : MonoBehaviour
 {
     [SerializeField]
@@ -29,8 +30,11 @@ public class Shooting : MonoBehaviour
     private LineRenderer lineRenderer;
     private float cooldown = 0f;
 
+    private PlaceOnTheMapComponent placeOnTheMapComponent;
+
     void Start()
     {
+        placeOnTheMapComponent = GetComponent<PlaceOnTheMapComponent>();
         lineRenderer = GetComponent<LineRenderer>();
 
         if (shootingOrigin is null)
@@ -154,14 +158,16 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
-        Vector3 targetVector = Vector3.Normalize(currentTarget.transform.position - shootingOrigin.transform.position);
+        if (placeOnTheMapComponent.isActive())
+        {
+            Vector3 targetVector = Vector3.Normalize(currentTarget.transform.position - shootingOrigin.transform.position);
 
-        GameObject newProjectile = Instantiate(projectile);
-        newProjectile.transform.position = shootingOrigin.transform.position;
-        newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
-        //newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
-        newProjectile.transform.SetParent(MapSingleton.Instance.Map.transform);
-        newProjectile.GetComponent<ProjectileComponent>().Target = currentTarget;
-
+            GameObject newProjectile = Instantiate(projectile);
+            newProjectile.transform.position = shootingOrigin.transform.position;
+            newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
+            //newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
+            newProjectile.transform.SetParent(MapSingleton.Instance.Map.transform);
+            newProjectile.GetComponent<ProjectileComponent>().Target = currentTarget;
+        }
     }
 }

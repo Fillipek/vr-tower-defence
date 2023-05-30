@@ -55,6 +55,9 @@ public class PlaceOnTheMapComponent : MonoBehaviour
         state = State.Active;
     }
 
-  
+    public bool isActive()
+    {
+        return state == State.Active;
+    }
    
 }
