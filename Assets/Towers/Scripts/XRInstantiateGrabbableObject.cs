@@ -11,14 +11,17 @@ public class XRInstantiateGrabbableObject : XRBaseInteractable
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        // Instantiate object
-        GameObject newObject = Instantiate(grabbableObject, ControllersSingleton.Instance.RightController.transform.position, Quaternion.identity);
-        // Get grab interactable from prefab
-        XRGrabInteractable objectInteractable = newObject.GetComponent<XRGrabInteractable>();
+        if (this.GetComponent<PriceComponent>().Buy())
+        {
+            // Instantiate object
+            GameObject newObject = Instantiate(grabbableObject, ControllersSingleton.Instance.RightController.transform.position, Quaternion.identity);
+            // Get grab interactable from prefab
+            XRGrabInteractable objectInteractable = newObject.GetComponent<XRGrabInteractable>();
 
-        // Select object into same interactor
-        interactionManager.SelectEnter(args.interactorObject, objectInteractable);
+            // Select object into same interactor
+            interactionManager.SelectEnter(args.interactorObject, objectInteractable);
 
-        base.OnSelectEntered(args);
+            base.OnSelectEntered(args);
+        }
     }
 }
