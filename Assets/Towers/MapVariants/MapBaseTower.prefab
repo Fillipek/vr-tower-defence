@@ -88,6 +88,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
+--- !u!1 &4882764217145989637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8733158786112166679, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
+  m_PrefabInstance: {fileID: 4247309558033514770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5685915577205691969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8365743748772075347, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
@@ -240,12 +245,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5685915577205691969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a52c49880088f3848a508dffb5853ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: b15a42bac0f01744594f4703063c161c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: Enemy
-  projectile: {fileID: 777031600298419813, guid: 952dbf3ab0c6e0b47bba62d72008fb84, type: 3}
-  shootingOrigin: {fileID: 2206124010005232076}
+  projectile: {fileID: 777031600298419813, guid: 0b80a80df5fd3da4894ba2ccff9167a0, type: 3}
+  shootingOrigin: {fileID: 4882764217145989637}
   velocity: 1
   frequency: 1
 --- !u!114 &7203045026162134750

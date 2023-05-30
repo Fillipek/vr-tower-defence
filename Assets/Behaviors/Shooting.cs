@@ -47,8 +47,10 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
+        TargetTheNearestEnemy();
         UpdateShooting();
         UpdateLineVisual();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -84,15 +86,27 @@ public class Shooting : MonoBehaviour
             currentTarget = null;
             return;
         }
-        GameObject closestEnemy = enemiesInRange.First();
-        float minDistance = Vector3.Distance(closestEnemy.transform.position, transform.position);
+        GameObject closestEnemy = null;
+        float minDistance = 10000000f;
         foreach (var enemy in enemiesInRange)
         {
-            float distance = Vector3.Distance(enemy.transform.position, transform.position);
-            if (distance < minDistance)
+            if (enemy != null)
             {
-                closestEnemy = enemy;
-                minDistance = distance;
+                if (closestEnemy == null)
+                {
+
+                    closestEnemy = enemy;
+                    minDistance = Vector3.Distance(closestEnemy.transform.position, MapSingleton.Instance.Map.transform.position);
+                }
+                else
+                {
+                    float distance = Vector3.Distance(enemy.transform.position, MapSingleton.Instance.Map.transform.position);
+                    if (distance < minDistance)
+                    {
+                        closestEnemy = enemy;
+                        minDistance = distance;
+                    }
+                }
             }
         }
         if (currentTarget != closestEnemy)
@@ -140,13 +154,14 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log("pew");
         Vector3 targetVector = Vector3.Normalize(currentTarget.transform.position - shootingOrigin.transform.position);
 
         GameObject newProjectile = Instantiate(projectile);
         newProjectile.transform.position = shootingOrigin.transform.position;
         newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
-        newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
+        //newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
+        newProjectile.transform.SetParent(MapSingleton.Instance.Map.transform);
+        newProjectile.GetComponent<ProjectileComponent>().Target = currentTarget;
 
     }
 }
