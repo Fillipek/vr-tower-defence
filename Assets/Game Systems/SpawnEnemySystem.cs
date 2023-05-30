@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Security.Cryptography;
 using Unity.Mathematics;
 using Unity.XR.CoreUtils;
@@ -19,6 +20,8 @@ public class SpawnEnemySystem : MonoBehaviour
 
     AreaHeightComponent wallHeight = null;
     AreaHeightComponent spawnHeight = null;
+
+    List<GameObject> spawned = new List<GameObject>();
     // Start is called before the first frame update
     private void Init()
     {
@@ -51,15 +54,26 @@ public class SpawnEnemySystem : MonoBehaviour
         PrepareForSpawn(wave);
         yield return new WaitForSeconds(SpawnAreaStateChangeTime);
         Spawn(wave);
-        yield return new WaitForSeconds(WallAreaStateChangeTime);
+        yield return new WaitForSeconds(SpawnAreaStateChangeTime);
         ActivateWave(wave);
+        yield return new WaitForSeconds(WallAreaStateChangeTime);
+        ActivateEnemies(wave);
         yield return null;
+    }
+
+    private void ActivateEnemies(Wave wave)
+    {
+        wave.state = Wave.State.Ended;
+        foreach (var obj in spawned)
+        {
+            obj.GetComponent<EnemyBaseComponent>().Activate();
+        }
+        spawned.Clear();
     }
 
     private void ActivateWave(Wave wave)
     {
-        wave.state = Wave.State.Ended;
-        wallHeight.Lower(SpawnAreaStateChangeTime);
+        wallHeight.Lower(WallAreaStateChangeTime);
     }
 
     private void Spawn(Wave wave)
@@ -86,8 +100,18 @@ public class SpawnEnemySystem : MonoBehaviour
                 Vector3 pos = Helper.SphericalToCartesian(UnityEngine.Random.Range(.85f, .95f), enemy.angle+i, 0);
                 GameObject newObject = Instantiate(enemy.enemy, MapSingleton.Instance.Enemy.transform ,false);
                 newObject.transform.localPosition = pos;
+                spawned.Add(newObject);
             }
         }
+    }
+
+    public bool AllWaveEnded()
+    {
+        foreach(var wave in Waves)
+        {
+            if(wave.state != Wave.State.Ended) return false;
+        }
+        return true;
     }
 
     [System.Serializable]

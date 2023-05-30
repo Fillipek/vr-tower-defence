@@ -59,10 +59,8 @@ public class Shooting : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("In shooting range: " + other.gameObject);
         if (other.CompareTag(enemyTag))
         {
-            Debug.Log("Enemy tag detected, adding to enemy list");
             enemiesInRange.Add(other.gameObject);
             if (currentTarget is null)
             {
@@ -73,10 +71,8 @@ public class Shooting : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Left shooting range: " + other.gameObject);
         if (other.CompareTag(enemyTag))
         {
-            Debug.Log("Enemy tag detected, removing from enemy list");
             enemiesInRange.Remove(other.gameObject);
             TargetTheNearestEnemy();
         }
@@ -86,7 +82,6 @@ public class Shooting : MonoBehaviour
     {
         if (enemiesInRange.Count == 0)
         {
-            Debug.Log("No enemies in list, target set to null.");
             currentTarget = null;
             return;
         }
@@ -94,17 +89,17 @@ public class Shooting : MonoBehaviour
         float minDistance = 10000000f;
         foreach (var enemy in enemiesInRange)
         {
-            if (enemy != null)
+            if (enemy != null && enemy.GetComponent<EnemyBaseComponent>().isActive())
             {
                 if (closestEnemy == null)
                 {
 
                     closestEnemy = enemy;
-                    minDistance = Vector3.Distance(closestEnemy.transform.position, MapSingleton.Instance.Map.transform.position);
+                    minDistance = closestEnemy.transform.localPosition.sqrMagnitude;
                 }
                 else
                 {
-                    float distance = Vector3.Distance(enemy.transform.position, MapSingleton.Instance.Map.transform.position);
+                    float distance = enemy.transform.localPosition.sqrMagnitude;
                     if (distance < minDistance)
                     {
                         closestEnemy = enemy;
@@ -115,12 +110,7 @@ public class Shooting : MonoBehaviour
         }
         if (currentTarget != closestEnemy)
         {
-            Debug.Log("Changing target from " + currentTarget + " to " + closestEnemy);
             currentTarget = closestEnemy;
-        }
-        else
-        {
-            Debug.Log("Target uchanged.");
         }
         
     }

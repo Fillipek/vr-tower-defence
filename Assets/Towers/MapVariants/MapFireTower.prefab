@@ -404,10 +404,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: Enemy
-  projectile: {fileID: 777031600298419813, guid: 0b80a80df5fd3da4894ba2ccff9167a0, type: 3}
+  projectile: {fileID: 777031600298419813, guid: 4298aaa297a995e42a98418fc0c5753f, type: 3}
   shootingOrigin: {fileID: 5690366364212525827}
   velocity: 1
-  frequency: 1
+  frequency: 0.5
 --- !u!1 &5690366364212525827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8733158786112166679, guid: 9c9e4493ba0939e44a2e1c20f8cfc05f, type: 3}

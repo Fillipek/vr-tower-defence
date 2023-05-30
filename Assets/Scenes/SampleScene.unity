@@ -1307,6 +1307,7 @@ GameObject:
   - component: {fileID: 1097941319}
   - component: {fileID: 1097941318}
   - component: {fileID: 1097941320}
+  - component: {fileID: 1097941321}
   m_Layer: 0
   m_Name: Game System
   m_TagString: Untagged
@@ -1339,7 +1340,7 @@ MonoBehaviour:
       number: 3
       enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
   - state: 0
-    timer: 15
+    timer: 25
     enemies:
     - angle: 200
       number: 4
@@ -1348,14 +1349,26 @@ MonoBehaviour:
       number: 4
       enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
   - state: 0
-    timer: 25
+    timer: 50
     enemies:
     - angle: 260
-      number: 20
+      number: 10
       enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
     - angle: 310
-      number: 20
+      number: 10
       enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
+  - state: 0
+    timer: 80
+    enemies:
+    - angle: 0
+      number: 14
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 140
+      number: 10
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 280
+      number: 20
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
 --- !u!4 &1097941317
 Transform:
   m_ObjectHideFlags: 0
@@ -1408,6 +1421,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCoins: 600
+--- !u!114 &1097941321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097941315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05b1b5ce23175b4c88170789e674707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1359870996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7332786951940148580, guid: 34b051ee858be1d459a5e60c4576f74b, type: 3}
@@ -2128,6 +2153,10 @@ PrefabInstance:
       propertyPath: m_Controllers.Array.data[0]
       value: 
       objectReference: {fileID: 1598895314}
+    - target: {fileID: 5803319060006501141, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7222062065497151460, guid: cecb75cd50783294aa9dbbc923b2160c, type: 3}
       propertyPath: speed_of_lifting
       value: 5
