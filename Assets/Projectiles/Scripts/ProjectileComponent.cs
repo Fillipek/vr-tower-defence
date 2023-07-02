@@ -2,51 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ProjectileComponent : MonoBehaviour
 {
-    [SerializeField] public GameObject Target;
-
-    [SerializeField] public float speed = 1f;
+    [SerializeField] public float velocity = 1f;
 
     [SerializeField] public int damage = 10;
 
-    // Start is called before the first frame update
+    [SerializeField] private string enemyTag = "Enemy";
+
+    [Tooltip("The amount of seconds object is kept alive after colliding with another object.")]
+    [SerializeField] private float clearTime = 1f;
+
+    [Tooltip("Set whether stick to collided object.")]
+    [SerializeField] bool stickUponCollision = true;
+
+    [Tooltip("Minimum travel distance to start sticking.")]
+    [SerializeField] private float minTravelDistance = 0.1f;
+
+    private float absoluteLifeTime = 30f;
+
+    private Vector3 spawnLoc;
+    public Vector3 TargetLoc { get; set; }
+
+    private bool canDealDamage = true;
+
     void Start()
     {
-        
+        spawnLoc = transform.position;
+
+        GetComponent<Rigidbody>().velocity = Vector3.Normalize(TargetLoc-spawnLoc) * velocity;
+
+        Destroy(gameObject, absoluteLifeTime);
     }
 
-    Vector3 prevDist = new Vector3(1000000f, 100000f, 1000000f);
-    // Update is called once per frame
     void Update()
     {
-        if(Target == null)
-        {
-            Remove();
-            return;
-        }
-        transform.Translate(Vector3.Normalize(Target.transform.localPosition - transform.localPosition) * speed * Time.deltaTime, MapSingleton.Instance.Map.transform);
-        
-        var dist = Target.transform.position - transform.position;
-        Debug.Log(dist.sqrMagnitude);
-        if(dist.sqrMagnitude >= prevDist.sqrMagnitude)
-        {
-            Target.GetComponent<HealthComponent>().DealDamage(damage);
-            Remove();
-        }
-        prevDist = dist;
+
     }
 
-    void Remove()
+    private void OnCollisionEnter(Collision collision)
     {
-        var tempList = transform.Cast<Transform>().ToList();
-        foreach (var child in tempList)
+        DealDamageToEnemy(collision.gameObject);
+        if (stickUponCollision)
         {
-
-            DestroyImmediate(child.gameObject);
+            StickTo(collision.gameObject);
         }
-        DestroyImmediate(this.gameObject);
+        Destroy(gameObject, clearTime);
+    }
+
+    void DealDamageToEnemy(GameObject enemy)
+    {
+        if (enemy.tag == enemyTag && canDealDamage)
+        {
+            var enemyHealth = enemy.GetComponent<HealthComponent>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.DealDamage(damage);
+                canDealDamage = false;
+            }
+        }
+    }
+
+    void StickTo(GameObject obj)
+    {
+        if (Vector3.Magnitude(transform.position - spawnLoc) >= minTravelDistance)
+        {
+            transform.SetParent(obj.transform);
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        }
     }
 }

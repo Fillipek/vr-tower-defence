@@ -86,7 +86,7 @@ public class Shooting : MonoBehaviour
             return;
         }
         GameObject closestEnemy = null;
-        float minDistance = 10000000f;
+        float minDistance = float.MaxValue;
         foreach (var enemy in enemiesInRange)
         {
             if (enemy != null && enemy.GetComponent<EnemyBaseComponent>().isActive())
@@ -157,7 +157,7 @@ public class Shooting : MonoBehaviour
             newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
             //newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
             newProjectile.transform.SetParent(MapSingleton.Instance.Map.transform);
-            newProjectile.GetComponent<ProjectileComponent>().Target = currentTarget;
+            newProjectile.GetComponent<ProjectileComponent>().TargetLoc = currentTarget.transform.position;
         }
     }
 }
