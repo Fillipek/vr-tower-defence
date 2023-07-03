@@ -265,7 +265,6 @@ MonoBehaviour:
   enemyTag: Enemy
   projectile: {fileID: 777031600298419813, guid: 0b80a80df5fd3da4894ba2ccff9167a0, type: 3}
   shootingOrigin: {fileID: 2206124010005232076}
-  velocity: 1
   frequency: 1
 --- !u!114 &7203045026162134750
 MonoBehaviour:

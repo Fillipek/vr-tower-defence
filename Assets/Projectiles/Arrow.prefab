@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af623d0820958fe4f899bfe4865d3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 4
+  velocity: 10
   damage: 10
   enemyTag: Enemy
   clearTime: 5

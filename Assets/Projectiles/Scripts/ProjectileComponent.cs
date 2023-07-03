@@ -23,22 +23,24 @@ public class ProjectileComponent : MonoBehaviour
     private float absoluteLifeTime = 30f;
 
     private Vector3 spawnLoc;
-    public Vector3 TargetLoc { get; set; }
 
     private bool canDealDamage = true;
 
     void Start()
     {
         spawnLoc = transform.position;
-
-        GetComponent<Rigidbody>().velocity = Vector3.Normalize(TargetLoc-spawnLoc) * velocity;
+        //GetComponent<Rigidbody>().velocity = transform.localToWorldMatrix * Vector3.forward * velocity;
 
         Destroy(gameObject, absoluteLifeTime);
     }
 
     void Update()
     {
-
+        var velocity = GetComponent<Rigidbody>().velocity;
+        if (canDealDamage && velocity.magnitude > .1f)
+        {
+            transform.rotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -49,6 +51,7 @@ public class ProjectileComponent : MonoBehaviour
             StickTo(collision.gameObject);
         }
         Destroy(gameObject, clearTime);
+        canDealDamage = false;
     }
 
     void DealDamageToEnemy(GameObject enemy)
@@ -59,7 +62,6 @@ public class ProjectileComponent : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.DealDamage(damage);
-                canDealDamage = false;
             }
         }
     }
@@ -71,6 +73,7 @@ public class ProjectileComponent : MonoBehaviour
             transform.SetParent(obj.transform);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            GetComponent<Rigidbody>().freezeRotation = true;
         }
     }
 }

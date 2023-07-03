@@ -424,7 +424,6 @@ MonoBehaviour:
   enemyTag: Enemy
   projectile: {fileID: 777031600298419813, guid: 4298aaa297a995e42a98418fc0c5753f, type: 3}
   shootingOrigin: {fileID: 5690366364212525827}
-  velocity: 1
   frequency: 0.5
 --- !u!1 &5690366364212525827 stripped
 GameObject:
