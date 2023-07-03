@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProjectileComponent : MonoBehaviour
 {
-    [SerializeField] public float velocity = 1f;
+    [SerializeField] public float maxVelocity = 1f;
 
     [SerializeField] public int damage = 10;
 
@@ -16,9 +16,6 @@ public class ProjectileComponent : MonoBehaviour
 
     [Tooltip("Set whether stick to collided object.")]
     [SerializeField] bool stickUponCollision = true;
-
-    [Tooltip("Minimum travel distance to start sticking.")]
-    [SerializeField] private float minTravelDistance = 0.1f;
 
     private float absoluteLifeTime = 30f;
 
@@ -68,12 +65,9 @@ public class ProjectileComponent : MonoBehaviour
 
     void StickTo(GameObject obj)
     {
-        if (Vector3.Magnitude(transform.position - spawnLoc) >= minTravelDistance)
-        {
-            transform.SetParent(obj.transform);
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            GetComponent<Rigidbody>().freezeRotation = true;
-        }
+        transform.SetParent(obj.transform);
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        GetComponent<Rigidbody>().freezeRotation = true;
     }
 }

@@ -117,13 +117,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5685915577205691969}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1000000
+  m_Drag: 1000000
+  m_AngularDrag: 1000000
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!135 &7490571912155318319
 SphereCollider:
@@ -266,6 +266,7 @@ MonoBehaviour:
   projectile: {fileID: 777031600298419813, guid: 0b80a80df5fd3da4894ba2ccff9167a0, type: 3}
   shootingOrigin: {fileID: 2206124010005232076}
   frequency: 1
+  shootingAngle: 0
 --- !u!114 &7203045026162134750
 MonoBehaviour:
   m_ObjectHideFlags: 0

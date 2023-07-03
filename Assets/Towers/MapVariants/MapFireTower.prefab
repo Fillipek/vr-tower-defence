@@ -119,11 +119,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!135 &8835377371984098125
 SphereCollider:
@@ -136,7 +136,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!120 &1308871760254324129
 LineRenderer:
@@ -423,13 +423,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTag: Enemy
   projectile: {fileID: 777031600298419813, guid: 4298aaa297a995e42a98418fc0c5753f, type: 3}
-  shootingOrigin: {fileID: 5690366364212525827}
-  frequency: 0.5
---- !u!1 &5690366364212525827 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8733158786112166679, guid: 9c9e4493ba0939e44a2e1c20f8cfc05f, type: 3}
-  m_PrefabInstance: {fileID: 4020122007084195860}
-  m_PrefabAsset: {fileID: 0}
+  shootingOrigin: {fileID: 396640800496391699}
+  frequency: 0.2
+  shootingAngle: 20
 --- !u!4 &8851172984933513683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5557434541381327303, guid: 9c9e4493ba0939e44a2e1c20f8cfc05f, type: 3}

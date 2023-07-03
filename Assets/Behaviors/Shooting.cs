@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 
@@ -16,10 +17,13 @@ public class Shooting : MonoBehaviour
     private GameObject projectile;
 
     [SerializeField]
-    private GameObject shootingOrigin;
+    private GameObject shootingOrigin; 
 
     [SerializeField]
     private float frequency = 1.0f;
+
+    [SerializeField] [Range(-90f, 90f)]
+    private float shootingAngle = 0f;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private GameObject currentTarget = null;
@@ -132,21 +136,9 @@ public class Shooting : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            float points = 20;
-            float timeStep = 0.03f;
-
-            lineRenderer.positionCount = Mathf.CeilToInt(points + 1);
-
-            Vector3 startPos = shootingOrigin.transform.position;
-            Vector3 targetPos = currentTarget.transform.position + currentTarget.GetComponent<Rigidbody>().velocity;
-            Vector3 velocity = ThrowCalculator.CalculateThrowingVelocity(startPos, targetPos, 0f);
-
-            for (int i = 0; i <= points; i++)
-            {
-                float time = i * timeStep;
-                Vector3 point = startPos + velocity * time + 0.5f * time * time * Physics.gravity;
-                lineRenderer.SetPosition(i, point);
-            }
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, shootingOrigin.transform.position);
+            lineRenderer.SetPosition(1, currentTarget.transform.position);
         }
         else
         {
@@ -162,44 +154,14 @@ public class Shooting : MonoBehaviour
 
             Vector3 startPos = shootingOrigin.transform.position;
             Vector3 targetPos = currentTarget.transform.position;
-            Vector3 targetVector = (currentTarget.transform.position - shootingOrigin.transform.position).normalized;
-            float projectileSpeed = newProjectile.GetComponent<ProjectileComponent>().velocity;
+            float projectileSpeed = newProjectile.GetComponent<ProjectileComponent>().maxVelocity;
 
-            //targetVector = PredictTrajectory(shootingOrigin.transform.position, currentTarget.transform.position, projectileSpeed);
-            targetVector = ThrowCalculator.CalculateThrowingVelocity(startPos, targetPos, 0f);
+            Vector3 targetVector = ThrowCalculator.CalculateThrowingVelocity(startPos, targetPos, shootingAngle);
 
             newProjectile.transform.position = shootingOrigin.transform.position;
             newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
             newProjectile.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(targetVector, projectileSpeed);
             newProjectile.transform.SetParent(MapSingleton.Instance.Map.transform);
         }
-    }
-
-    private Vector3 PredictTrajectory(Vector3 source, Vector3 target, float speed)
-    {
-        float yaw, pitch;
-        var straight = (currentTarget.transform.position - shootingOrigin.transform.position).normalized;
-
-        pitch = Mathf.Asin((target - source).magnitude * Physics.gravity.magnitude / (speed * speed)) / 2f;
-        pitch *= Mathf.Rad2Deg;
-
-        yaw = Mathf.Atan2(straight.z, straight.x);
-        yaw *= Mathf.Rad2Deg;
-
-        Debug.Log("pitch = " + pitch + ", yaw = " + yaw);
-        Debug.Log("Flat aiming = " + straight);
-        Debug.Log("After correction = " + SphericalToCartesian(yaw, -pitch));
-
-        return straight;
-    }
-
-    private Vector3 SphericalToCartesian(float polar, float elevation)
-    {
-        Vector3 outCart = new Vector3();
-        float a = Mathf.Cos(elevation);
-        outCart.x = a * Mathf.Cos(polar);
-        outCart.y = Mathf.Sin(elevation);
-        outCart.z = a * Mathf.Sin(polar);
-        return outCart;
     }
 }

@@ -98,12 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af623d0820958fe4f899bfe4865d3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 10
+  maxVelocity: 10
   damage: 10
   enemyTag: Enemy
   clearTime: 5
   stickUponCollision: 1
-  minTravelDistance: 0.5
 --- !u!65 &-7775896803051953801
 BoxCollider:
   m_ObjectHideFlags: 0
