@@ -24,8 +24,15 @@ public class EnemyBaseComponent : MonoBehaviour
     {
         if (isActive())
         {
-            transform.Translate(Vector3.Normalize(MapSingleton.Instance.Enemy.transform.localPosition - transform.localPosition) * speed * Time.deltaTime, MapSingleton.Instance.Map.transform);
-            if(transform.localPosition.magnitude < 0.12)
+            GetComponent<Rigidbody>().velocity = (MapSingleton.Instance.Enemy.transform.localPosition - transform.localPosition).normalized * speed;
+            //transform.Translate(
+            //    Vector3.Normalize(MapSingleton.Instance.Enemy.transform.localPosition - transform.localPosition) * speed * Time.deltaTime, 
+            //    MapSingleton.Instance.Map.transform
+            //);
+            Vector2 lookTarget = MapSingleton.Instance.Map.transform.position;
+            lookTarget.y = 0f;
+            transform.LookAt(lookTarget);
+            if (transform.localPosition.magnitude < 0.12)
             {
                 if (MapSingleton.Instance.MainCastle != null)
                 {

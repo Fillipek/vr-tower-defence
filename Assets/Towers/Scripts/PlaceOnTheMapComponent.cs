@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlaceOnTheMapComponent : MonoBehaviour
 {
+    [SerializeField] private float sellRange = 1f;
+    [SerializeField] private float placingRange = 1f;
 
     public enum State
     {
@@ -32,7 +34,7 @@ public class PlaceOnTheMapComponent : MonoBehaviour
         transform.SetParent(MapSingleton.Instance.Towers.transform);
 
 
-        if (transform.localPosition.magnitude > 1f)
+        if (transform.localPosition.magnitude > sellRange)
         {
             if (state == State.Bought)
             {
@@ -49,7 +51,7 @@ public class PlaceOnTheMapComponent : MonoBehaviour
             }
         }
 
-        transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, .7f);
+        transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, placingRange);
 
         
         state = State.Active;

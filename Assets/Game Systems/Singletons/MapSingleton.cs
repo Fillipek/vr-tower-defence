@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MapSingleton : MonoBehaviour
 {
-    public static MapSingleton Instance { get; private set; }
+    public static MapSingleton Instance;
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -20,22 +20,22 @@ public class MapSingleton : MonoBehaviour
         }
     }
 
-    public GameObject Map { get; private set; }
-    public GameObject Enemy { get; private set; }
-    public GameObject Towers { get; private set; }
-    public GameObject Spawn { get; private set; }
-    public GameObject Wall { get; private set; }
-    public GameObject MainCastle { get; private set; }
-    public GameObject Message { get; private set; }
+    [SerializeField] public GameObject Map;
+    [SerializeField] public GameObject Enemy;
+    [SerializeField] public GameObject Towers;
+    [SerializeField] public GameObject Spawn;
+    [SerializeField] public GameObject Wall;
+    [SerializeField] public GameObject MainCastle;
+    [SerializeField] public GameObject Message;
     private void Start()
     {
-        Map = GameObject.Find("Map");
-        Enemy = Map.GetNamedChild("Enemy");
-        Towers = Map.GetNamedChild("Towers");
-        Wall = Map.GetNamedChild("wall-area");
-        Spawn = Map.GetNamedChild("spawn-area");
-        MainCastle = Map.GetNamedChild("MainCastle");
-        Message = Map.GetNamedChild("Message");
+        //Map = GameObject.Find("Map");
+        //Enemy = Map.GetNamedChild("Enemy");
+        //Towers = Map.GetNamedChild("Towers");
+        //Wall = Map.GetNamedChild("wall-area");
+        //Spawn = Map.GetNamedChild("spawn-area");
+        //MainCastle = Map.GetNamedChild("MainCastle");
+        //Message = Map.GetNamedChild("Message");
     }
  
 }

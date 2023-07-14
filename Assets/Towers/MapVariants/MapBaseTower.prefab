@@ -43,6 +43,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5557434541381327303, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557434541381327303, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557434541381327303, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557434541381327303, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -82,17 +94,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5557434541381327303, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8365743748772075347, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
       propertyPath: m_Name
       value: MapBaseTower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
---- !u!1 &4882764217145989637 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8733158786112166679, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
-  m_PrefabInstance: {fileID: 4247309558033514770}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5685915577205691969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8365743748772075347, guid: 6ce2e7b21ddfd3f479a8ed12e3bb87a6, type: 3}
@@ -106,13 +117,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5685915577205691969}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1000000
+  m_Drag: 1000000
+  m_AngularDrag: 1000000
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!135 &7490571912155318319
 SphereCollider:
@@ -236,6 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003eb04c7e3460343a363ea662d4172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sellRange: 9
+  placingRange: 8
   state: 0
 --- !u!114 &7079447158759667072
 MonoBehaviour:
@@ -251,9 +264,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTag: Enemy
   projectile: {fileID: 777031600298419813, guid: 0b80a80df5fd3da4894ba2ccff9167a0, type: 3}
-  shootingOrigin: {fileID: 4882764217145989637}
-  velocity: 1
+  shootingOrigin: {fileID: 2206124010005232076}
   frequency: 1
+  shootingAngle: 0
 --- !u!114 &7203045026162134750
 MonoBehaviour:
   m_ObjectHideFlags: 0

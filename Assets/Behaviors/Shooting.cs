@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(LineRenderer))]
@@ -17,13 +17,13 @@ public class Shooting : MonoBehaviour
     private GameObject projectile;
 
     [SerializeField]
-    private GameObject shootingOrigin;
-
-    [SerializeField]
-    private float velocity = 1.0f;
+    private GameObject shootingOrigin; 
 
     [SerializeField]
     private float frequency = 1.0f;
+
+    [SerializeField] [Range(-90f, 90f)]
+    private float shootingAngle = 0f;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private GameObject currentTarget = null;
@@ -86,7 +86,7 @@ public class Shooting : MonoBehaviour
             return;
         }
         GameObject closestEnemy = null;
-        float minDistance = 10000000f;
+        float minDistance = float.MaxValue;
         foreach (var enemy in enemiesInRange)
         {
             if (enemy != null && enemy.GetComponent<EnemyBaseComponent>().isActive())
@@ -150,14 +150,18 @@ public class Shooting : MonoBehaviour
     {
         if (placeOnTheMapComponent.isActive())
         {
-            Vector3 targetVector = Vector3.Normalize(currentTarget.transform.position - shootingOrigin.transform.position);
-
             GameObject newProjectile = Instantiate(projectile);
+
+            Vector3 startPos = shootingOrigin.transform.position;
+            Vector3 targetPos = currentTarget.transform.position;
+            float projectileSpeed = newProjectile.GetComponent<ProjectileComponent>().maxVelocity;
+
+            Vector3 targetVector = ThrowCalculator.CalculateThrowingVelocity(startPos, targetPos, shootingAngle);
+
             newProjectile.transform.position = shootingOrigin.transform.position;
             newProjectile.transform.rotation = Quaternion.LookRotation(targetVector, Vector3.up);
-            //newProjectile.GetComponent<Rigidbody>().velocity = targetVector * velocity;
+            newProjectile.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(targetVector, projectileSpeed);
             newProjectile.transform.SetParent(MapSingleton.Instance.Map.transform);
-            newProjectile.GetComponent<ProjectileComponent>().Target = currentTarget;
         }
     }
 }

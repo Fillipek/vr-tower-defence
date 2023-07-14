@@ -15,6 +15,7 @@ public class SpawnEnemySystem : MonoBehaviour
 {
     [SerializeField] private float SpawnAreaStateChangeTime = 2f;
     [SerializeField] private float WallAreaStateChangeTime = 5f;
+    [SerializeField] private Vector2 spawnRangeMinMax = Vector2.one;
     [SerializeField] private Wave[] Waves;
 
 
@@ -97,7 +98,7 @@ public class SpawnEnemySystem : MonoBehaviour
             for (var i = 0; i < enemy.number; i++)
             {
 
-                Vector3 pos = Helper.SphericalToCartesian(UnityEngine.Random.Range(.85f, .95f), enemy.angle+i, 0);
+                Vector3 pos = Helper.SphericalToCartesian(UnityEngine.Random.Range(spawnRangeMinMax.y, spawnRangeMinMax.x), enemy.angle+i, 0);
                 GameObject newObject = Instantiate(enemy.enemy, MapSingleton.Instance.Enemy.transform ,false);
                 newObject.transform.localPosition = pos;
                 spawned.Add(newObject);
