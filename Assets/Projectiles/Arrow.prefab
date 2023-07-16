@@ -101,7 +101,7 @@ MonoBehaviour:
   maxVelocity: 10
   damage: 10
   enemyTag: Enemy
-  clearTime: 5
+  clearTime: 0.5
   stickUponCollision: 1
 --- !u!65 &-7775896803051953801
 BoxCollider:

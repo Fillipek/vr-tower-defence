@@ -68,6 +68,6 @@ public class ProjectileComponent : MonoBehaviour
         transform.SetParent(obj.transform);
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        GetComponent<Rigidbody>().freezeRotation = true;
+        GetComponent<Rigidbody>().isKinematic = false;
     }
 }
