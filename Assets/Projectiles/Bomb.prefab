@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af623d0820958fe4f899bfe4865d3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 100
+  maxVelocity: 120
   damage: 50
   enemyTag: Enemy
-  clearTime: 2
+  clearTime: 1
   stickUponCollision: 0
 --- !u!54 &8516896676630068228
 Rigidbody:
