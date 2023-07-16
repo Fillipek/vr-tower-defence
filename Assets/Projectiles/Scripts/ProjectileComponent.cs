@@ -46,6 +46,7 @@ public class ProjectileComponent : MonoBehaviour
         if (stickUponCollision)
         {
             StickTo(collision.gameObject);
+            Destroy(gameObject);
         }
         Destroy(gameObject, clearTime);
         canDealDamage = false;

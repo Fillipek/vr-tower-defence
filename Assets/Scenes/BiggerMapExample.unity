@@ -1707,44 +1707,50 @@ MonoBehaviour:
   spawnRangeMinMax: {x: 9, y: 10}
   Waves:
   - state: 0
-    timer: 5
+    timer: 10
     enemies:
     - angle: 60
-      number: 3
-      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
-    - angle: 90
-      number: 3
+      number: 5
       enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
+    - angle: 90
+      number: 6
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
   - state: 0
-    timer: 25
+    timer: 30
     enemies:
     - angle: 200
-      number: 4
+      number: 10
       enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
     - angle: 230
-      number: 4
+      number: 6
       enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
   - state: 0
-    timer: 50
+    timer: 60
     enemies:
     - angle: 260
-      number: 10
+      number: 20
       enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
     - angle: 310
       number: 10
       enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
   - state: 0
-    timer: 80
+    timer: 100
     enemies:
     - angle: 0
-      number: 14
+      number: 20
       enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
     - angle: 140
-      number: 10
-      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+      number: 15
+      enemy: {fileID: 4405367104892413080, guid: c79dd7e7b2fafe943be7fa745f51cdab, type: 3}
     - angle: 280
       number: 20
       enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 280
+      number: 15
+      enemy: {fileID: 4405367104892413080, guid: dca1d4404e029c94aaff7b696fece517, type: 3}
+    - angle: 150
+      number: 4
+      enemy: {fileID: 4405367104892413080, guid: 53477c509ebb4b14aae620d989d6e508, type: 3}
 --- !u!4 &1097941317
 Transform:
   m_ObjectHideFlags: 0
