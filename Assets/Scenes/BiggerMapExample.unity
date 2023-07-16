@@ -5084,7 +5084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944e1f0ed5a6dc4a8c37fff556510bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
+  price: 200
 --- !u!4 &1946150799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6553754603604231613, guid: 4fc285c82f48a8f4c89d1de061e639d3, type: 3}
@@ -5102,7 +5102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944e1f0ed5a6dc4a8c37fff556510bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
+  price: 200
 --- !u!114 &1946150801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5495,7 +5495,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Hammer
 
-    Free'
+    200'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5622,7 +5622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fire Skill
+  m_text: 'Fireball
 
     200'
   m_isRightToLeft: 0
